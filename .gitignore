@@ -1,0 +1,27 @@
+# Build outputs
+bin/
+obj/
+*.dll
+*.exe
+*.xbf
+*.pri
+*.msix
+*.msixbundle
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Claude Code local settings (machine-specific paths and permissions)
+.claude/settings.local.json
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+
+# Config (optional - keep template)
+# config.yaml

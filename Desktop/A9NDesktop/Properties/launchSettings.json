@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "A9NDesktop (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "A9NDesktop (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

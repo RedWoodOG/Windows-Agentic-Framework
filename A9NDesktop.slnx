@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Desktop/">
+    <Project Path="Desktop/A9NDesktop/A9NDesktop.csproj" />
+    <Project Path="Desktop/A9NDesktop.Tests/A9NDesktop.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/A9N.Core.csproj" />
+  </Folder>
+</Solution>

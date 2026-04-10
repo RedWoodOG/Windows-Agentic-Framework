@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="A9NDesktop.Views.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Transparent"
+    Loaded="OnPageLoaded"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Padding="32,24,32,40" Spacing="20">
+
+            <!-- ═══ KPI Stats Row ═══ -->
+            <Grid ColumnSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Sessions -->
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Sessions" FontSize="12" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                        <TextBlock x:Name="SessionCountText" Text="0" FontSize="28" FontWeight="Bold"
+                                   Foreground="{StaticResource AppAccentTextBrush}"/>
+                        <TextBlock Text="total conversations" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}" Opacity="0.6"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Tools -->
+                <Border Grid.Column="1" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Tools" FontSize="12" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                        <TextBlock x:Name="ToolCountText" Text="0" FontSize="28" FontWeight="Bold"
+                                   Foreground="#6BCB77"/>
+                        <TextBlock Text="registered" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}" Opacity="0.6"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Skills -->
+                <Border Grid.Column="2" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Skills" FontSize="12" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                        <TextBlock x:Name="SkillCountText" Text="0" FontSize="28" FontWeight="Bold"
+                                   Foreground="#818CF8"/>
+                        <TextBlock Text="available" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}" Opacity="0.6"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- LLM Status -->
+                <Border Grid.Column="3" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="LLM Status" FontSize="12" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Ellipse x:Name="LlmStatusDot" Width="10" Height="10" Fill="#6BCB77" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="LlmStatusText" Text="Checking..." FontSize="20" FontWeight="Bold"/>
+                        </StackPanel>
+                        <TextBlock x:Name="LlmModelText" Text="" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}" Opacity="0.6"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- ═══ Platforms & Model Row ═══ -->
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Platforms & Services -->
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="14">
+                        <TextBlock Text="Platforms &amp; Services" FontSize="16" FontWeight="SemiBold"/>
+
+                        <!-- Platform badges -->
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Messaging" FontSize="12" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <StackPanel x:Name="PlatformBadges" Orientation="Horizontal" Spacing="8">
+                                <!-- Populated in code-behind -->
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Services -->
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Services" FontSize="12" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <StackPanel x:Name="ServiceBadges" Orientation="Horizontal" Spacing="8">
+                                <!-- Populated in code-behind -->
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Model Info -->
+                <Border Grid.Column="1" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Model Configuration" FontSize="16" FontWeight="SemiBold"/>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Provider" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock x:Name="ProviderText" FontSize="14" FontWeight="SemiBold"
+                                       Foreground="{StaticResource AppAccentTextBrush}"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Model" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock x:Name="ModelNameText" FontSize="14" FontWeight="SemiBold"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Endpoint" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock x:Name="EndpointText" FontSize="12" TextWrapping="Wrap"
+                                       Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                        </StackPanel>
+
+                        <Button Content="Test Connection" Click="TestConnection_Click"
+                                Background="{StaticResource AppAccentGradientBrush}" Foreground="#16110D"
+                                Padding="16,8" FontSize="12"/>
+                        <TextBlock x:Name="TestConnectionResult" FontSize="11" TextWrapping="Wrap"
+                                   Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- ═══ Recent Activity & Paths Row ═══ -->
+            <Grid ColumnSpacing="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Recent Sessions -->
+                <Border Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="8">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <TextBlock Text="Recent Activity" FontSize="16" FontWeight="SemiBold"/>
+                            <Button Content="Open Chat" Click="LaunchA9NChat_Click" FontSize="11" Padding="10,4"
+                                    Background="{StaticResource AppAccentGradientBrush}" Foreground="#16110D" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <ListView x:Name="RecentSessionsList" Background="Transparent" SelectionMode="None" MaxHeight="250">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,4" ColumnDefinitions="Auto,*,Auto">
+                                        <Ellipse Width="8" Height="8" Fill="{Binding StatusColor}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding Preview}" FontSize="13" MaxLines="1" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Text="{Binding MessageCount}" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                                        </StackPanel>
+                                        <TextBlock Grid.Column="2" Text="{Binding TimeAgo}" FontSize="11"
+                                                   Foreground="{StaticResource AppTextSecondaryBrush}" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <TextBlock x:Name="NoSessionsText" Text="No sessions yet. Start a conversation in Chat."
+                                   FontSize="12" Opacity="0.5" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- System Paths -->
+                <Border Grid.Column="1" Style="{StaticResource SurfaceCardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="System" FontSize="16" FontWeight="SemiBold"/>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="A9N Home" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock Text="{x:Bind A9NHomePath, Mode=OneTime}" FontSize="12" TextWrapping="Wrap" FontFamily="Consolas"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Config" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock Text="{x:Bind A9NConfigPath, Mode=OneTime}" FontSize="12" TextWrapping="Wrap" FontFamily="Consolas"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="Souls" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock x:Name="ActiveSoulText" FontSize="12" FontFamily="Consolas"
+                                       Foreground="{StaticResource AppAccentTextBrush}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="Open Logs" Click="OpenLogs_Click" FontSize="11" Padding="10,4"
+                                    Background="{StaticResource AppInsetBrush}" BorderBrush="{StaticResource AppStrokeBrush}" Foreground="White"/>
+                            <Button Content="Open Config" Click="OpenConfig_Click" FontSize="11" Padding="10,4"
+                                    Background="{StaticResource AppInsetBrush}" BorderBrush="{StaticResource AppStrokeBrush}" Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            <!-- ═══ Usage Insights ═══ -->
+            <Border x:Name="InsightsPanel" Style="{StaticResource SurfaceCardStyle}" Visibility="Collapsed">
+                <StackPanel Spacing="14">
+                    <TextBlock Text="Usage Insights" FontSize="16" FontWeight="SemiBold"/>
+
+                    <Grid ColumnSpacing="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Total Messages -->
+                        <StackPanel Spacing="2">
+                            <TextBlock Text="Total Turns" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock x:Name="InsightsTurnsText" Text="0" FontSize="22" FontWeight="Bold"
+                                       Foreground="{StaticResource AppAccentTextBrush}"/>
+                        </StackPanel>
+
+                        <!-- Total Tool Calls -->
+                        <StackPanel Grid.Column="1" Spacing="2">
+                            <TextBlock Text="Tool Calls" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock x:Name="InsightsToolCallsText" Text="0" FontSize="22" FontWeight="Bold"
+                                       Foreground="#6BCB77"/>
+                        </StackPanel>
+
+                        <!-- Avg Response Time -->
+                        <StackPanel Grid.Column="2" Spacing="2">
+                            <TextBlock Text="Est. Cost" FontSize="11" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                            <TextBlock x:Name="InsightsCostText" Text="$0.00" FontSize="22" FontWeight="Bold"
+                                       Foreground="#818CF8"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Top Tools -->
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="Top Tools" FontSize="12" Foreground="{StaticResource AppTextSecondaryBrush}"/>
+                        <StackPanel x:Name="TopToolsList" Spacing="2"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
